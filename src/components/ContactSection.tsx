@@ -6,22 +6,49 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Mail, Linkedin } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll get back to you soon!",
-    });
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.send(
+        'service_glcja9a', // Service ID
+        'template_bqkdedw', // Template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        '1rhnoMV8aIifrL5xQ' // Public Key
+      );
+
+      toast({
+        title: "Message Sent Successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon!",
+      });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or contact me directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -73,6 +100,18 @@ const ContactSection = () => {
               </div>
               
               <div>
+                <Input
+                  type="text"
+                  name="subject"
+                  placeholder="Subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-purple-500"
+                />
+              </div>
+              
+              <div>
                 <Textarea
                   name="message"
                   placeholder="Your Message"
@@ -86,9 +125,10 @@ const ContactSection = () => {
               
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-lg transition-all duration-300 hover:scale-105"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
           </Card>
@@ -106,10 +146,10 @@ const ContactSection = () => {
                   <div>
                     <h4 className="text-lg font-semibold text-white">Email</h4>
                     <a 
-                      href="mailto:ivyashreer254@gmail.com"
+                      href="mailto:divyashreer254@gmail.com"
                       className="text-purple-400 hover:text-purple-300 transition-colors"
                     >
-                      ivyashreer254@gmail.com
+                      divyashreer254@gmail.com
                     </a>
                   </div>
                 </div>
@@ -133,7 +173,7 @@ const ContactSection = () => {
               </div>
             </Card>
 
-            <Card className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30 p-8">
+            <Card className="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border-indigo-500/20 p-8">
               <h3 className="text-xl font-semibold text-white mb-4">Let's Collaborate!</h3>
               <p className="text-gray-300 leading-relaxed">
                 I'm always excited to work on innovative projects and connect with fellow developers. 

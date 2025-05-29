@@ -16,6 +16,7 @@ const HeroSection = () => {
           <div className="relative inline-block">
             <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 p-1 animate-pulse">
               <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center overflow-hidden">
+                {/* Placeholder for profile image - will be replaced once image is provided */}
                 <div className="w-44 h-44 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-6xl font-bold text-white">
                   DR
                 </div>

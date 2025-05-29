@@ -47,7 +47,7 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-white">Connect</h3>
             <div className="flex space-x-4">
               <a
-                href="mailto:ivyashreer254@gmail.com"
+                href="mailto:divyashreer254@gmail.com"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-purple-500 transition-all duration-300 hover:scale-110"
               >
                 <Mail className="w-5 h-5 text-white" />
@@ -61,7 +61,9 @@ const Footer = () => {
                 <Linkedin className="w-5 h-5 text-white" />
               </a>
               <a
-                href="#"
+                href="https://github.com/DivyashreeR25"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-gray-700 transition-all duration-300 hover:scale-110"
               >
                 <Github className="w-5 h-5 text-white" />

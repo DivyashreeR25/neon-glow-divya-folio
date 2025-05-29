@@ -38,16 +38,6 @@ const AboutSection = () => {
                   <p className="text-gray-400">MVJ College of Engineering (2022–2026)</p>
                   <p className="text-purple-400 font-semibold">CGPA: 9.2</p>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-white">PUC</h4>
-                  <p className="text-gray-400">Narayana Residential Pre-University</p>
-                  <p className="text-pink-400 font-semibold">93%</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white">SSLC</h4>
-                  <p className="text-gray-400">Sharada Vidya Mandira</p>
-                  <p className="text-blue-400 font-semibold">94%</p>
-                </div>
               </div>
             </Card>
           </div>
