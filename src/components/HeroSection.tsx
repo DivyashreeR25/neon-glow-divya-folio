@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '../components/ui/button';
 
@@ -14,7 +13,7 @@ const HeroSection = () => {
         <div className="relative mb-8">
           {/* Profile Picture with glow effect */}
           <div className="relative inline-block">
-            <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 p-1 animate-pulse">
+            <div className="w-48 h-48 mx-auto rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 p-1">
               <div className="w-full h-full rounded-full overflow-hidden">
                 <img 
                   src="/lovable-uploads/b84857cf-cbed-4fd7-a52e-57d471761916.png"
@@ -23,9 +22,6 @@ const HeroSection = () => {
                 />
               </div>
             </div>
-            {/* Floating elements around profile */}
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-bounce delay-1000"></div>
-            <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-green-400 rounded-full animate-bounce delay-2000"></div>
           </div>
         </div>
 
