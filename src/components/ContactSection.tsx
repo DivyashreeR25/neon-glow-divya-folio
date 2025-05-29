@@ -150,9 +150,9 @@ const ContactSection = () => {
               </div>
             </Card>
 
-            {/* Let's Collaborate Section - Redesigned */}
-            <Card className="bg-gradient-to-br from-slate-800/50 to-gray-800/50 border-white/20 p-8 backdrop-blur-sm">
-              <h3 className="text-2xl font-semibold text-white mb-4">Let's Collaborate</h3>
+            {/* Let's Collaborate Section - Matching Send a Message styling */}
+            <Card className="bg-white/5 border-white/10 p-8 hover:bg-white/10 transition-all duration-300">
+              <h3 className="text-2xl font-semibold text-white mb-6">Let's Collaborate</h3>
               <p className="text-gray-300 leading-relaxed mb-6">
                 I'm always excited to work on innovative projects and connect 
                 with fellow developers. Whether you have a project idea, want 
