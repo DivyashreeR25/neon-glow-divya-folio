@@ -4,8 +4,7 @@ import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
-import { Mail, Linkedin } from 'lucide-react';
-import { useToast } from '../hooks/use-toast';
+import { Mail, Linkedin, MapPin, Phone } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
@@ -16,7 +15,13 @@ const ContactSection = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,38 +29,25 @@ const ContactSection = () => {
 
     try {
       await emailjs.send(
-        'service_glcja9a', // Service ID
-        'template_bqkdedw', // Template ID
+        'service_glcja9a',
+        'template_bqkdedw',
         {
           from_name: formData.name,
           from_email: formData.email,
           subject: formData.subject,
           message: formData.message,
         },
-        '1rhnoMV8aIifrL5xQ' // Public Key
+        '1rhnoMV8aIifrL5xQ'
       );
-
-      toast({
-        title: "Message Sent Successfully!",
-        description: "Thank you for reaching out. I'll get back to you soon!",
-      });
+      
+      alert('Message sent successfully!');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again or contact me directly.",
-        variant: "destructive",
-      });
+      console.error('Error sending email:', error);
+      alert('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
   };
 
   return (
@@ -64,7 +56,7 @@ const ContactSection = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Get In Touch
+              Contact Me
             </span>
           </h2>
           <p className="text-xl text-gray-400">Let's build something amazing together</p>
@@ -72,99 +64,84 @@ const ContactSection = () => {
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <Card className="bg-white/5 border-white/10 p-8">
+          <Card className="bg-white/5 border-white/10 p-8 hover:bg-white/10 transition-all duration-300">
             <h3 className="text-2xl font-semibold text-white mb-6">Send a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <Input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-purple-500"
-                />
-              </div>
-              
-              <div>
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-purple-500"
-                />
-              </div>
-              
-              <div>
-                <Input
-                  type="text"
-                  name="subject"
-                  placeholder="Subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-purple-500"
-                />
-              </div>
-              
-              <div>
-                <Textarea
-                  name="message"
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-purple-500 resize-none"
-                />
-              </div>
-              
+              <Input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+              />
+              <Input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+              />
+              <Input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                value={formData.subject}
+                onChange={handleInputChange}
+                required
+                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+              />
+              <Textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+                rows={5}
+                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+              />
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
           </Card>
 
-          {/* Contact Information */}
+          {/* Contact Info & Let's Collaborate */}
           <div className="space-y-8">
+            {/* Contact Information */}
             <Card className="bg-white/5 border-white/10 p-8 hover:bg-white/10 transition-all duration-300">
-              <h3 className="text-2xl font-semibold text-white mb-6">Contact Information</h3>
-              
-              <div className="space-y-6">
+              <h3 className="text-2xl font-semibold text-white mb-6">Get in Touch</h3>
+              <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white">Email</h4>
-                    <a 
-                      href="mailto:divyashreer254@gmail.com"
-                      className="text-purple-400 hover:text-purple-300 transition-colors"
-                    >
+                    <p className="text-gray-400">Email</p>
+                    <a href="mailto:divyashreer254@gmail.com" className="text-white hover:text-purple-400 transition-colors">
                       divyashreer254@gmail.com
                     </a>
                   </div>
                 </div>
-
+                
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
                     <Linkedin className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white">LinkedIn</h4>
+                    <p className="text-gray-400">LinkedIn</p>
                     <a 
-                      href="https://linkedin.com/in/divyashree-r-0b194928a"
-                      target="_blank"
+                      href="https://linkedin.com/in/divyashree-r-0b194928a" 
+                      target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 transition-colors"
+                      className="text-white hover:text-blue-400 transition-colors"
                     >
                       linkedin.com/in/divyashree-r-0b194928a
                     </a>
@@ -173,12 +150,25 @@ const ContactSection = () => {
               </div>
             </Card>
 
-            <Card className="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border-indigo-500/20 p-8">
-              <h3 className="text-xl font-semibold text-white mb-4">Let's Collaborate!</h3>
-              <p className="text-gray-300 leading-relaxed">
-                I'm always excited to work on innovative projects and connect with fellow developers. 
-                Whether you have a project idea, want to collaborate, or just want to say hi, feel free to reach out!
+            {/* Let's Collaborate Section - Redesigned */}
+            <Card className="bg-gradient-to-br from-slate-800/50 to-gray-800/50 border-white/20 p-8 backdrop-blur-sm">
+              <h3 className="text-2xl font-semibold text-white mb-4">Let's Collaborate</h3>
+              <p className="text-gray-300 leading-relaxed mb-6">
+                I'm always excited to work on innovative projects and connect 
+                with fellow developers. Whether you have a project idea, want 
+                to collaborate, or just want to say hi, feel free to reach out!
               </p>
+              <div className="flex flex-wrap gap-3">
+                <span className="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm border border-purple-500/30">
+                  Full-Stack Development
+                </span>
+                <span className="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-sm border border-pink-500/30">
+                  Web Applications
+                </span>
+                <span className="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm border border-blue-500/30">
+                  Blockchain Projects
+                </span>
+              </div>
             </Card>
           </div>
         </div>
