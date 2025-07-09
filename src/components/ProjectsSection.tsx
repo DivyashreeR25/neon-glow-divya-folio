@@ -22,7 +22,7 @@ const ProjectsSection = () => {
     {
   "title": "AI-Powered Document Summarizer",
   "description": "An intelligent system that uses NLP techniques to generate concise summaries from large documents, enabling quick content understanding.",
-  "technologies": ["Python", "NLTK", "spaCy", "Flask", "Machine Learning"],
+  "technologies": ["Python", "Gemini API", "Flask", "Machine Learning","React.js"],
   "status": "Completed",
   "githubLink": "#",
   "features": [
