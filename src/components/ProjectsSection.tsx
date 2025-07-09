@@ -20,6 +20,19 @@ const ProjectsSection = () => {
       ]
     },
     {
+  "title": "AI-Powered Document Summarizer",
+  "description": "An intelligent system that uses NLP techniques to generate concise summaries from large documents, enabling quick content understanding.",
+  "technologies": ["Python", "NLTK", "spaCy", "Flask", "Machine Learning"],
+  "status": "Completed",
+  "githubLink": "#",
+  "features": [
+    "Extractive and abstractive summarization",
+    "Supports multiple document formats (PDF, TXT)",
+    "Web-based user interface for easy access",
+    "Fast and accurate summary generation"
+  ]
+},
+    {
       title: 'PranaEdge Wellness App',
       description: 'Comprehensive wellness application featuring nutrition guidance, diet tracking, sleep monitoring, and AI-powered yoga pose detection.',
       technologies: ['Python', 'JavaScript', 'TensorFlow', 'OpenCV', 'MediaPipe'],
